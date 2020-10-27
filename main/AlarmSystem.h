@@ -1,26 +1,24 @@
-#include <ESP8266WiFi.h>
-#include <Pinger.h>
-#include <ArduinoSTL.h>
 
 class AlarmSystem
 {
 public:
-  AlarmSystem()   // Konstruktor
+  AlarmSystem();   // Konstruktor
 
   // Setting PINs
-  const int m_trigPin = 12;
-  const int m_echoPin = 13;
-  const int m_pirPin = 5;
+  const int m_trigPin;
+  const int m_echoPin;
+  const int m_pirPin;
 
   // Parameters
-  const int m_ignoreReachAfterDoorOpen = 2 * 60 * 1000; // 2 minutes
-  const int m_noReachDurationForLeave = 15 * 60 * 1000; // 15 minutes
-  const int m_wifiLogOnDurationGrant = 30 * 1000; // 30 seconds
+  const int m_ignoreReachAfterDoorOpen;
+  const int m_noReachDurationForLeave;
+  const int m_wifiLogOnDurationGrant;
+  const int m_pirWarmUpDuration;
 
   // Resident addresses
-  Vector<IPAddress> m_addresses;
-  m_addresses.push_back(IPAddress(192,168,178,20));
-  m_addresses.push_back(IPAddress(192,168,178,125));
+  //Vector<IPAddress> m_addresses;
+  //m_addresses.push_back(IPAddress(192,168,178,20));
+  //m_addresses.push_back(IPAddress(192,168,178,125));
 
   // Operating variables
   float m_bootTime;
@@ -33,10 +31,10 @@ public:
 
   void setState(int newState);
   void stepMachine();
-  void checkDoor();
-  void checkMotion();
+  bool checkDoor();
+  bool checkMotion();
   void resetSystem();
 
 private:
 
-}
+};
